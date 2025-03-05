@@ -36,7 +36,7 @@ def procesos(env, numero, ram, cpu): #simula la vida de cada proceso
 
     # Devuelve la RAM asignada cuando el proceso termina
     ram.put(RAM_necesaria)
-    print(f"Proceso: {numero} libera {RAM_necesaria} de RAM y termina (Terminado)")
+    print(str(env.now) + f" {numero} libera {RAM_necesaria} de RAM y termina (Terminado)")
     
 # (corredores)
 def generador(env, ram, cpu, num_procesos=25): #Generador de procesos, el num_procesos define 
@@ -56,12 +56,6 @@ cpu = simpy.Resource(env, capacity=1) # Solo se puede ejecutar un proceso a la v
 #Tiempo que tarda la simulacion 
 inicio = time.time()
 
-#Toma tiempo de cada proceso
-env = simpy.Environment()
-ram = simpy.Container(env, init=100, capacity=100)
-cpu = simpy.Resource(env, capacity=1)
-
-
 # Inicia la generacion de los procesos
 env.process(generador(env, ram, cpu))
 
@@ -71,4 +65,4 @@ env.run()
 fin = time.time()
 
 #Calcula y muestra el tiempo
-print(f"Tiempo total de simulación: {fin - inicio:.4f} segundos")
+print(f"Tiempo total de simulación: {fin - inicio:.4f} segundos " + str((env.now)))
