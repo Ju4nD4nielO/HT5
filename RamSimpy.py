@@ -53,7 +53,7 @@ def procesos(env, numero, ram, cpu): #simula la vida de cada proceso
     print(str(env.now) + f" {numero} libera {RAM_necesaria} de RAM y termina (Terminado)")
     
 # (corredores)
-def generador(env, ram, cpu, num_procesos=25): #Generador de procesos, el num_procesos define 
+def generador(env, ram, cpu, num_procesos = 25): #Generador de procesos, el num_procesos define 
                                                #el numero de procesos que generara antes de parar 
     for id in range(1, num_procesos + 1):
         env.process(procesos(env, f"Proceso {id}", ram, cpu))
@@ -64,7 +64,7 @@ def generador(env, ram, cpu, num_procesos=25): #Generador de procesos, el num_pr
 # Simulación con SimPy
 env = simpy.Environment()
 ram = simpy.Container(env, init=100, capacity=100) # La memoria solo llega hasta el numero x 
-cpu = simpy.Resource(env, capacity=1) # Solo se puede ejecutar un proceso a la vez
+cpu = simpy.Resource(env, capacity=2) # Solo se puede ejecutar un proceso a la vez
 
 # Inicia la generacion de los procesos
 env.process(generador(env, ram, cpu))
